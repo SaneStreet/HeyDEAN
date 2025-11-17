@@ -1,3 +1,5 @@
+using System.ComponentModel.DataAnnotations.Schema;
+
 public class Event
 {
     public int EventId {get; set;}
@@ -8,4 +10,8 @@ public class Event
     public DateTime? CreatedAt {get; set;} = DateTime.UtcNow;
 
     // Tilføj UserId FK funktionalitet
+    public Guid UserId { get; set; }
+
+    [ForeignKey("UserId")]
+    public User? User { get; set; }
 }
