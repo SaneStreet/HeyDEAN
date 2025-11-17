@@ -2,7 +2,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.2.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HeyDEAN_API", "HeyDEAN\HeyDEAN_API.csproj", "{857BE235-8039-7310-68E0-E21D146BA5A5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HeyDEAN_API", "HeyDEAN_API\HeyDEAN_API.csproj", "{857BE235-8039-7310-68E0-E21D146BA5A5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
