@@ -19,9 +19,9 @@ namespace HeyDEAN_API.Data
 
             modelBuilder.Entity<User>(b =>
             {
-                b.HasKey(u => u.Id);
+                b.HasKey(u => u.UserId);
                 b.HasIndex(u => u.Username).IsUnique();
-                b.Property(u => u.CreatedAt).HasDefaultValueSql("CURRENT_TIMESTAMP");
+                b.Property(u => u.CreatedAt).HasColumnType("DATETIME(6)");
             });
 
             modelBuilder.Entity<TaskItem>(b =>
@@ -31,7 +31,7 @@ namespace HeyDEAN_API.Data
                     .WithMany(u => u.Tasks)
                     .HasForeignKey(t => t.UserId)
                     .OnDelete(DeleteBehavior.Cascade);
-                b.Property(t => t.CreatedAt).HasDefaultValueSql("CURRENT_TIMESTAMP");
+                b.Property(t => t.CreatedAt).HasColumnType("DATETIME(6)");
             });
 
             modelBuilder.Entity<Note>(b =>
@@ -41,7 +41,7 @@ namespace HeyDEAN_API.Data
                     .WithMany(u => u.Notes)
                     .HasForeignKey(n => n.UserId)
                     .OnDelete(DeleteBehavior.Cascade);
-                b.Property(n => n.CreatedAt).HasDefaultValueSql("CURRENT_TIMESTAMP");
+                b.Property(n => n.CreatedAt).HasColumnType("DATETIME(6)");
             });
 
             modelBuilder.Entity<Event>(b =>
@@ -51,7 +51,7 @@ namespace HeyDEAN_API.Data
                     .WithMany(u => u.Events)
                     .HasForeignKey(e => e.UserId)
                     .OnDelete(DeleteBehavior.Cascade);
-                b.Property(e => e.CreatedAt).HasDefaultValueSql("CURRENT_TIMESTAMP");
+                b.Property(e => e.CreatedAt).HasColumnType("DATETIME(6)");
             });
 
             modelBuilder.Entity<VoiceLog>(b =>
@@ -61,7 +61,7 @@ namespace HeyDEAN_API.Data
                     .WithMany(u => u.VoiceLogs)
                     .HasForeignKey(v => v.UserId)
                     .OnDelete(DeleteBehavior.SetNull);
-                b.Property(v => v.CreatedAt).HasDefaultValueSql("CURRENT_TIMESTAMP");
+                b.Property(v => v.CreatedAt).HasColumnType("DATETIME(6)");
             });
         }
     }
