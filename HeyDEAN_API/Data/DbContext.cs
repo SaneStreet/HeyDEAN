@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using HeyDEAN_API.Models;
 
 namespace HeyDEAN_API.Data
 {
@@ -15,6 +16,53 @@ namespace HeyDEAN_API.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<User>(b =>
+            {
+                b.HasKey(u => u.Id);
+                b.HasIndex(u => u.Username).IsUnique();
+                b.Property(u => u.CreatedAt).HasDefaultValueSql("CURRENT_TIMESTAMP");
+            });
+
+            modelBuilder.Entity<TaskItem>(b =>
+            {
+                b.HasKey(t => t.TaskId);
+                b.HasOne(t => t.User)
+                    .WithMany(u => u.Tasks)
+                    .HasForeignKey(t => t.UserId)
+                    .OnDelete(DeleteBehavior.Cascade);
+                b.Property(t => t.CreatedAt).HasDefaultValueSql("CURRENT_TIMESTAMP");
+            });
+
+            modelBuilder.Entity<Note>(b =>
+            {
+                b.HasKey(n => n.NoteId);
+                b.HasOne(n => n.User)
+                    .WithMany(u => u.Notes)
+                    .HasForeignKey(n => n.UserId)
+                    .OnDelete(DeleteBehavior.Cascade);
+                b.Property(n => n.CreatedAt).HasDefaultValueSql("CURRENT_TIMESTAMP");
+            });
+
+            modelBuilder.Entity<Event>(b =>
+            {
+                b.HasKey(e => e.EventId);
+                b.HasOne(e => e.User)
+                    .WithMany(u => u.Events)
+                    .HasForeignKey(e => e.UserId)
+                    .OnDelete(DeleteBehavior.Cascade);
+                b.Property(e => e.CreatedAt).HasDefaultValueSql("CURRENT_TIMESTAMP");
+            });
+
+            modelBuilder.Entity<VoiceLog>(b =>
+            {
+                b.HasKey(v => v.VoiceLogId);
+                b.HasOne(v => v.User)
+                    .WithMany(u => u.VoiceLogs)
+                    .HasForeignKey(v => v.UserId)
+                    .OnDelete(DeleteBehavior.SetNull);
+                b.Property(v => v.CreatedAt).HasDefaultValueSql("CURRENT_TIMESTAMP");
+            });
         }
     }
 }
