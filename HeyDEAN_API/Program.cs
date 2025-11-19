@@ -23,6 +23,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 builder.Services.AddScoped<IIntentService, IntentService>();
 builder.Services.AddScoped<IVoiceService, VoiceService>();
+builder.Services.AddTransient<Seeder>();
 
 var app = builder.Build();
 
@@ -32,7 +33,8 @@ using (var scope = app.Services.CreateScope())
     var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
     db.Database.Migrate();
     // Tilføjer data fra .CSV ind i DB
-    //Seeder.SeedProducts(db, "Data/Cereal.csv");
+    var seeder = scope.ServiceProvider.GetRequiredService<Seeder>();
+    seeder.Seed();
 }
 
 // Configure the HTTP request pipeline.
