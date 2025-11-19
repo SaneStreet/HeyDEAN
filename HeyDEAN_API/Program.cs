@@ -1,6 +1,8 @@
 using HeyDEAN_API.Data;
+using HeyDEAN_API.Repositories;
+using HeyDEAN_API.Repositories.Interfaces;
+using HeyDEAN_API.Services;
 using Microsoft.EntityFrameworkCore;
-using MySql.Data.MySqlClient;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +18,11 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 {
     options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
 });
+
+// Add Repos and Services
+builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+builder.Services.AddScoped<IIntentService, IntentService>();
+builder.Services.AddScoped<IVoiceService, VoiceService>();
 
 var app = builder.Build();
 
@@ -36,7 +43,6 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
 app.MapControllers();
 
 app.Run();
