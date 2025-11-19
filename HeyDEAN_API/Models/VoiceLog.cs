@@ -1,16 +1,19 @@
-using System.ComponentModel.DataAnnotations.Schema;
-
-public class VoiceLog
+namespace HeyDEAN_API.Models
 {
-    public int VoiceLogId { get; set; }
-    public string? Transcript { get; set; }
-    public string? Intent { get; set; }
-    public string? Response { get; set; }
-    public DateTime? CreatedAt { get; set; } = DateTime.UtcNow;
+    using System.ComponentModel.DataAnnotations.Schema;
 
-    // Tilføj UserId FK funktionalitet
-    public Guid UserId { get; set; }
+    public class VoiceLog
+    {
+        public int VoiceLogId { get; set; }
+        public string? Transcript { get; set; } = string.Empty;
+        public string? Intent { get; set; }
+        public string? Response { get; set; } = string.Empty;
+        public DateTime CreatedAt { get; set; }
 
-    [ForeignKey("UserId")]
-    public User? User { get; set; }
+        // Tilføj UserId FK funktionalitet
+        public Guid UserId { get; set; }
+
+        [ForeignKey("UserId")]
+        public User? User { get; set; }
+}   
 }
