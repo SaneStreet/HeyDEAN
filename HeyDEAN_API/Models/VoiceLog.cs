@@ -12,5 +12,5 @@ namespace HeyDEAN_API.Models
 
         // Tilføj UserId FK funktionalitet
         public User? User { get; set; }
-}   
+    }   
 }
