@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-
 namespace HeyDEAN_API.Models
 {
     public class User

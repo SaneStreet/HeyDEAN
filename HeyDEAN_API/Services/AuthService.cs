@@ -9,7 +9,6 @@ using HeyDEAN_API.Repositories.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-using Org.BouncyCastle.Ocsp;
 
 namespace HeyDEAN_API.Services
 {

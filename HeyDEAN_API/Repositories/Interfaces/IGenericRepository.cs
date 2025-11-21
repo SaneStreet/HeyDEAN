@@ -1,5 +1,3 @@
-using System.Linq.Expressions;
-
 namespace HeyDEAN_API.Repositories.Interfaces
 {
     public interface IGenericRepository<T> where T : class
