@@ -89,9 +89,10 @@ var app = builder.Build();
 // Sætter scope på hvilken database og migrationer der skal bruges
 using (var scope = app.Services.CreateScope())
 {
+    // DbContext forbinder til Database
     var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
     db.Database.Migrate();
-    // Tilføjer data fra .CSV ind i DB
+    // Tilføjer data fra Seeder
     var seeder = scope.ServiceProvider.GetRequiredService<Seeder>();
     seeder.Seed();
 }
