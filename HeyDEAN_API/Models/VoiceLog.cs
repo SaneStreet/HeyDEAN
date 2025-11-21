@@ -3,7 +3,7 @@ namespace HeyDEAN_API.Models
     public class VoiceLog
     {
         public int VoiceLogId { get; set; }
-        public Guid UserId { get; set; }
+        public Guid? UserId { get; set; }
 
         public string? Transcript { get; set; } = string.Empty;
         public string? Intent { get; set; }
