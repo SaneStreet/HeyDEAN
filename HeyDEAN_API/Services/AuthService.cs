@@ -33,6 +33,9 @@ namespace HeyDEAN_API.Services
 
         private async Task<TokenResponseDto> CreateTokenResponse (User? user)
         {
+            if (user is null)
+                throw new ArgumentNullException(nameof(user));
+
             return new TokenResponseDto
             {
                 AccessToken = CreateToken(user),
