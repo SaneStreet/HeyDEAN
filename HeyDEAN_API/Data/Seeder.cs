@@ -1,6 +1,4 @@
-using HeyDEAN_API.Data;
 using HeyDEAN_API.Models;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace HeyDEAN_API.Data
@@ -25,22 +23,23 @@ namespace HeyDEAN_API.Data
             var user = new User
             {
                 UserId = Guid.NewGuid(),
-                Username = "peter",
-                PasswordHash = "parker-but-not-hashed",
+                Username = "tester",
+                PasswordHash = "tester-pass-not-hashed",
+                Role = "User",
                 CreatedAt = DateTime.UtcNow
             };
 
             var note = new Note
             {
                 UserId = user.UserId,
-                Content = "Remember to update my calendar.",
+                Content = "Just a test Note.",
                 CreatedAt = DateTime.UtcNow
             };
 
             var task = new TaskItem
             {
                 UserId = user.UserId,
-                Title = "Make a frontend for the new project.",
+                Title = "Just a test Task",
                 IsCompleted = false,
                 CreatedAt = DateTime.UtcNow,
                 DueDate = DateTime.UtcNow.AddDays(2)
@@ -49,14 +48,14 @@ namespace HeyDEAN_API.Data
             var voicelog = new VoiceLog
             {
                 UserId = user.UserId,
-                Transcript = "Hey Dean, what are my tasks for today?",
+                Transcript = "This is a Voicelog test",
                 CreatedAt = DateTime.UtcNow
             };
 
             var calendarEvent = new Event
             {
                 UserId = user.UserId,
-                Title = "Presentation for project #10",
+                Title = "This is an Event test",
                 Date = DateOnly.FromDateTime(DateTime.Now),
                 StartTime = TimeOnly.FromDateTime(DateTime.UtcNow.AddHours(2)),
                 EndTime = TimeOnly.FromDateTime(DateTime.UtcNow.AddHours(3))
