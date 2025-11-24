@@ -67,6 +67,20 @@ builder.Services.AddScoped<IVoiceService, VoiceService>();
 builder.Services.AddTransient<Seeder>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 
+// Add CORS policy
+// Konfigurer CORS
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowFrontend",
+        policy =>
+        {
+            policy.WithOrigins("http://localhost:5173") // Frontend URL
+                  .AllowAnyHeader()
+                  .AllowAnyMethod()
+                  .AllowCredentials();
+        });
+});
+
 // add JWT bearer
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer( options =>
@@ -85,6 +99,8 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     });
 
 var app = builder.Build();
+
+app.UseCors("AllowFrontend");
 
 // Sætter scope på hvilken database og migrationer der skal bruges
 using (var scope = app.Services.CreateScope())

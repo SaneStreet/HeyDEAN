@@ -1,0 +1,15 @@
+import axios from "axios";
+
+export const api = axios.create({
+  baseURL: "http://localhost:5152/api", // Backend URL
+});
+
+// Tilføj JWT token header automatisk
+api.interceptors.request.use((config) => {
+  const token = localStorage.getItem("token");
+  if (token) {
+    config.headers = config.headers || {};
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+  return config;
+});

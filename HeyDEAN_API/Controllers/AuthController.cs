@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace HeyDEAN_API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/auth")]
     [ApiController]
     public class AuthController(IAuthService authService) : ControllerBase
     {
@@ -35,7 +35,7 @@ namespace HeyDEAN_API.Controllers
         public async Task<ActionResult<TokenResponseDto>> RefreshToken(RefreshTokenRequestDto request)
         {
             var result = await authService.RefreshTokensAsync(request);
-            if(result is null || result.AccessToken is null || result.RefreshToken is null)
+            if(result is null || result.Token is null || result.RefreshToken is null)
                 return Unauthorized("Invalid refresh token.");
                 
             return Ok(result);

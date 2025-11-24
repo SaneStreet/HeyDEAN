@@ -37,8 +37,9 @@ namespace HeyDEAN_API.Services
 
             return new TokenResponseDto
             {
-                AccessToken = CreateToken(user),
-                RefreshToken = await GenerateAndSaveRefreshTokenAsync(user)
+                Token = CreateToken(user),
+                RefreshToken = await GenerateAndSaveRefreshTokenAsync(user),
+                UserId = user.UserId,
             };
         }
 
