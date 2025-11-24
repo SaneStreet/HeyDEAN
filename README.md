@@ -1,4 +1,4 @@
-# ![Robot wearing a monocle](image.png) HeyDEAN - Digital Execution, Assisting Nicely
+# 🦾 HeyDEAN - Digital Execution, Assisting Nicely
 
 ## TODOS:
 ### Priority:
