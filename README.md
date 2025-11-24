@@ -1,7 +1,11 @@
-# TODOS:
+# ![Robot wearing a monocle](image.png) HeyDEAN - Digital Execution, Assisting Nicely
 
-* Service classes for Task, Event, Note
-* Implement GetAsyncByUserId functionality, which should add Authorization for users (Only users access their own, not everybody's notes, tasks, events)
-* Frontend setup
-* Microphone functionality
-* Transcription and responses
+## TODOS:
+### Priority:
+1. Frontend setup
+2. Microphone functions (Transcription and responses)
+3. Flowcharts, Diagrams, etc
+
+4. User filtering on objects in DB
+(Service classes, and Authorization for Users (Limited access))
+
