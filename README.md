@@ -2,7 +2,7 @@
 
 ## TODOS:
 ### Priority:
-1. Frontend setup
+1. ~Frontend setup~
 2. Microphone functions (Transcription and responses)
 3. Flowcharts, Diagrams, etc
 
