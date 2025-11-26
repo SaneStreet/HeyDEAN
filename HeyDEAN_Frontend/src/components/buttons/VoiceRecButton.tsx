@@ -25,17 +25,9 @@ export default function VoiceRecButton({ onResult }: { onResult: (text: string) 
             console.log(errorMsg);
             return errorMsg;
         }
-
+        console.log("before startListening")
         SpeechRecognition.startListening({ continuous: false, language: "en-US" });
-
-        const handleStopListening = async () => {
-            const transcribedText = transcript;
-            console.log(transcribedText);
-            onResult(transcribedText);
-            resetTranscript();
-        };
-
-        SpeechRecognition.stopListening = handleStopListening;
+        console.log(transcript);
     };
 
     return (

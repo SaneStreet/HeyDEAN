@@ -4,17 +4,20 @@ import MultiPanel from "../components/panels/MultiPanel";
 import ChatBubbleUser from "../components/ChatBubbleUser";
 import ChatBubbleDean from "../components/ChatBubbleDean";
 
+console.log("This is loaded before the page")
 export default function DeanPage() {
+    console.log("this is before the variables")
     const [messages, setMessages] = useState<{ from: "user" | "dean"; text: string; panel?: any }[]>([]);
     const [error, setError] = useState("");
 
-    const handleVoiceInput = async (userText: string) => {
+    let handleVoiceInput = (userText: string) => {
         const token = localStorage.getItem("token");
-
+        console.log("This is inside VoiceInput after token")
         setMessages(prev => [...prev, { from: "user", text: userText }]);
 
+        console.log("This is outside of Try-catch")
         try {
-            const res = await fetch("http://localhost:5152/api/dean/ask", {
+            {/*const res = await fetch("http://localhost:5152/api/dean/ask", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -30,15 +33,13 @@ export default function DeanPage() {
                 setMessages(prev => [...prev, { from: "dean", text: data.message, panel: data.items }]);
             } else {
                 setMessages(prev => [...prev, { from: "dean", text: data.message }]);
-            }
+            }*/}
 
         } catch {
             setMessages(prev => [...prev, { from: "dean", text: "Error connecting to backend." }]);
             setError("Error connecting to backend.");
             console.log(error);
         }
-
-
     };
 
     return (
@@ -47,7 +48,7 @@ export default function DeanPage() {
             <p className="text-lg opacity-70">What can I help you with?</p>
             {error && <p className="text-red-500 mt-2.5">{error}</p>}
 
-            <VoiceRecButton onResult={handleVoiceInput} />
+            <VoiceRecButton onResult={() => handleVoiceInput} />
 
             {error && <p className="text-red-500 mt-2.5">{error}</p>}
             <div className="w-full min-h-fit max-w-lg space-y-4 mt-6">
