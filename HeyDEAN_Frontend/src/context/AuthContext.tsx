@@ -33,7 +33,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
       localStorage.setItem("token", data.token);
       localStorage.setItem("userId", data.userId);
       localStorage.setItem("refreshToken", data.refreshToken);
-      
+
       setToken(data.token);
 
       return true;
