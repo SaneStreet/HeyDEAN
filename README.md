@@ -173,11 +173,11 @@ DEAN skal på sigt kunne:
 * Forstå kontekst gennem tale
 * Udføre handlinger (CRUD operations)
 * Integrere kalender styring
-* Kører i flere formater end browser (Browser, App, Widget, Desktop?)
+* Kan assistere i flere formater (Browser, App, Widget, Desktop?)
 
 ---
 
-## ⏳ Yderligere udvikling
+## ⏳ Fremtidig udvikling
 
 * Brugerstyret data (kun brugerens egen data bliver vist)
 * Dockerization til nemmere kørsel
