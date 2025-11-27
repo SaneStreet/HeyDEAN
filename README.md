@@ -187,4 +187,4 @@ DEAN skal på sigt kunne:
 <br>&ensp; └──> PolyFill integration som understøtter andre browsers 
 * Custom persona og stemme til DEAN
 * Stemme aktivering eller call-to-action keywords (f.eks. "Hey Dean..")
-* Sprog registrering/recognition (evt. oversættelse og valg af svar fra DEAN) 
+* Registrering af sprog ved første besked til DEAN (language registration)
