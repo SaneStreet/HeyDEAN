@@ -184,5 +184,5 @@ DEAN skal på sigt kunne:
 * AI integration til bedre assistance (Ollama, GTP, etc)
 * Mulighed for Appudvikling (Native)
 * Andre muligheder for Voice recognitions (Er der andet end ```react-speech-recognition```?)
-<br>&ensp; &#8618; PolyFill integration som understøtter andre browsers 
+<br>&ensp; └──> PolyFill integration som understøtter andre browsers 
 * Custom persona og stemme til DEAN
