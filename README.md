@@ -88,7 +88,7 @@ HeyDEAN/
 
 For at installere og køre systemet, er der disse krav:
 * MySQL workbench/server (Systemet er opsat til at køre MySQL, men kan ændres til andre SQL udbydere)
-Denne skal helst køre før man tænder for API.
+<br>Denne skal helst køre før man tænder for API.
 
 ---
 
