@@ -186,3 +186,4 @@ DEAN skal på sigt kunne:
 * Andre muligheder for Voice recognitions (Er der andet end ```react-speech-recognition```?)
 <br>&ensp; └──> PolyFill integration som understøtter andre browsers 
 * Custom persona og stemme til DEAN
+* Stemme aktivering eller call-to-action keywords (f.eks. "Hey Dean..")
