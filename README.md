@@ -1,6 +1,6 @@
 # 🦾 HeyDEAN - Digital Execution, Assisting Nicely
 
-DEAN er en ```personlig assistent``` bygget med **React + TypeScript** på frontend og **ASP.NET Core Web API** på backend.  
+DEAN er en personlig assistent bygget med **React + TypeScript** på frontend og **ASP.NET Core Web API** på backend.  
 Assistenten bruger **speech recognition**, **JWT-auth**, og kan vise **Notes, Tasks og Events**, genereret ud fra dine voice-commands.
 
 ---
@@ -184,4 +184,5 @@ DEAN skal på sigt kunne:
 * AI integration til bedre assistance (Ollama, GTP, etc)
 * Mulighed for Appudvikling (Native)
 * Andre muligheder for Voice recognitions (Er der andet end ```react-speech-recognition```?)
+&emsp;* PolyFill integration som understøtter andre browsers 
 * Custom persona og stemme til DEAN
