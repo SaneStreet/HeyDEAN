@@ -13,7 +13,6 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
         <Routes>
           <Route path="/login" element={<LoginPage />} />
           <Route path="/dean" element={<DeanPage />} />
-          {/* fallback route */}
           <Route path="*" element={<LoginPage />} />
         </Routes>
       </BrowserRouter>

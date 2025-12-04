@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace HeyDEAN_API.Controllers
 {
     [ApiController]
-    [Route("api/tasks")]
+    [Route("api/[controller]")]
     public class TasksController : ControllerBase
     {
 
@@ -53,7 +53,7 @@ namespace HeyDEAN_API.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateTask([FromBody] CreateTaskDto dto)
         {
-            var t = new TaskItem { Title = dto.Title, DueDate = dto.DueDate };
+            var t = new TaskItem { Title = dto.Title };
             var created = await _repo.AddAsync(t);
             return CreatedAtAction(nameof(GetTaskById), new { id = created.TaskId }, created);
         }

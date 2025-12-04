@@ -20,39 +20,43 @@ export default function LoginPage() {
       navigate("/dean");
     } else {
       setError("Forkert brugernavn eller kodeord.");
+      console.log(error);
     }
   }
 
   return (
     <div style={{ maxWidth: "300px", margin: "50px auto", textAlign: "center" }}>
-      <h2>Login</h2>
+      <h2 className="pb-2.5 text-3xl uppercase font-mono">Login</h2>
 
       <form onSubmit={handleSubmit}>
         <input
           type="text"
           placeholder="Username"
+          id="username"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
-          style={{ width: "100%", padding: "10px", margin: "10px 0" }}
+          className="w-full border border-white/50 m-2.5 p-2.5 rounded flex"
         />
 
         <input
           type="password"
           placeholder="Password"
+          id="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          style={{ width: "100%", padding: "10px", margin: "10px 0" }}
+          className="w-full border border-white/50 m-2.5 p-2.5 rounded flex"
         />
 
         <button
           type="submit"
-          style={{ width: "100%", padding: "10px", marginTop: "10px" }}
+          id="login"
+          className="w-full m-2.5 p-2.5"
         >
           Login
         </button>
       </form>
 
-      {error && <p style={{ color: "red", marginTop: "10px" }}>{error}</p>}
+      {error && <p className="text-red-500 mt-2.5">{error}</p>}
     </div>
   );
 }
