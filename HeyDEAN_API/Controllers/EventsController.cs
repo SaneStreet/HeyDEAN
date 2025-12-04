@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace HeyDEAN_API.Controllers
 {
     [ApiController]
-    [Route("api/events")]
+    [Route("api/[controller]")]
     public class EventsController : ControllerBase
     {
         private readonly IGenericRepository<Event> _repo;
@@ -27,7 +27,8 @@ namespace HeyDEAN_API.Controllers
                 Title = dto.Title,
                 Date = dto.Date,
                 StartTime = dto.StartTime,
-                EndTime = dto.EndTime
+                EndTime = dto.EndTime,
+                CreatedAt = DateTime.UtcNow
             };
             var created = await _repo.AddAsync(e);
             return CreatedAtAction(nameof(GetAll), new { id = created.EventId }, created);

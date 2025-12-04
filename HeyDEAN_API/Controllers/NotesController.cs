@@ -4,7 +4,7 @@ using HeyDEAN_API.Repositories.Interfaces;
 
 namespace HeyDEAN_API.Controllers
 {
-    [Route("api/notes")]
+    [Route("api/[controller]")]
     [ApiController]
     public class NotesController : ControllerBase
     {
