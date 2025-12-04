@@ -62,8 +62,6 @@ builder.Services.AddSwaggerGen(options =>
 
 // Add Repos and Services
 builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
-builder.Services.AddScoped<IIntentService, IntentService>();
-builder.Services.AddScoped<IVoiceService, VoiceService>();
 builder.Services.AddTransient<Seeder>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 
