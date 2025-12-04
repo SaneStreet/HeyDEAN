@@ -14,6 +14,9 @@ namespace HeyDEAN_API.Services
 {
     public class AuthService(AppDbContext context, IConfiguration configuration) : IAuthService
     {
+        /*
+            Async login using UserDto req, to return null if succeeded
+        */
         public async Task<TokenResponseDto?> LoginAsync(UserDto request)
         {
             var user = await context.Users.FirstOrDefaultAsync(u => u.Username == request.Username);
@@ -30,6 +33,10 @@ namespace HeyDEAN_API.Services
             return await CreateTokenResponse(user);
         }
 
+        /*
+            Async creates a response with token provided for User object
+            Content: token, refreshToken, userID, userName
+        */
         private async Task<TokenResponseDto> CreateTokenResponse (User? user)
         {
             if (user is null)
@@ -40,9 +47,15 @@ namespace HeyDEAN_API.Services
                 Token = CreateToken(user),
                 RefreshToken = await GenerateAndSaveRefreshTokenAsync(user),
                 UserId = user.UserId,
+                UserName = user.Username,
             };
         }
 
+        /*
+            Async registration of Users using UserDto request
+            Checks for existing users
+            Hashes password, sets standard Role and Username 
+        */
         public async Task<User?> RegisterAsync(UserDto request)
         {
             if(await context.Users.AnyAsync(u => u.Username == request.Username))
@@ -63,6 +76,9 @@ namespace HeyDEAN_API.Services
             
         }
 
+        /*
+            Async creates RefreshToken for User object
+        */
         public async Task<TokenResponseDto?> RefreshTokensAsync(RefreshTokenRequestDto request)
         {
             var user = await ValidateRefreshTokenAsync(request.UserId, request.RefreshToken);
@@ -72,6 +88,9 @@ namespace HeyDEAN_API.Services
             return await CreateTokenResponse(user);
         }
 
+        /*
+            Validates the refresh token when requested for the User object
+        */
         private async Task<User?> ValidateRefreshTokenAsync(Guid userId, string refreshToken)
         {
             var user = await context.Users.FindAsync(userId);
@@ -81,6 +100,9 @@ namespace HeyDEAN_API.Services
             return user;
         }
 
+        /*
+            Generates a new refreshToken when needed
+        */
         private string GenerateRefreshToken()
         {
             var randomNumber = new byte[32];
@@ -89,6 +111,9 @@ namespace HeyDEAN_API.Services
             return Convert.ToBase64String(randomNumber);
         }
 
+        /*
+            Async makes and saves a new refreshToken, which expires after 7 days
+        */
         public async Task<string> GenerateAndSaveRefreshTokenAsync(User user)
         {
             var refreshToken = GenerateRefreshToken();
@@ -97,7 +122,12 @@ namespace HeyDEAN_API.Services
             await context.SaveChangesAsync();
             return refreshToken;
         }
-
+        
+        /*
+            Creates a new token for User object
+            Sets the Claim lists needed
+            Adds a symmetric security key, signed credentials and a JWT descriptor 
+        */
         private string CreateToken(User user)
         {
             var claims = new List<Claim>

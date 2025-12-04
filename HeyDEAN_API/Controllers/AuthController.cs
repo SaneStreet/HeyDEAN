@@ -4,9 +4,18 @@ using HeyDEAN_API.Repositories.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
+/*
+    Authentication controller for all Auth endpoints:
+        * POST register      - Using UserDto to async-ly create new users
+        * POST login         - Using UserDto to async-ly log in users with correct creds from DB
+        * POST refresh-token - Using TokenResponseDto to async-ly refresh Tokens if authorized
+        * AUTH "/"           - Authentication endpoint for testing Auth usability
+        * admin-only         - Role "Admin" needed to access. Used for testing user/admin accessability
+*/
+
 namespace HeyDEAN_API.Controllers
 {
-    [Route("api/auth")]
+    [Route("api/[controller]")]
     [ApiController]
     public class AuthController(IAuthService authService) : ControllerBase
     {
