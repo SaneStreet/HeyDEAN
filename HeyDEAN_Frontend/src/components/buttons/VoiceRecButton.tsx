@@ -75,7 +75,7 @@ export default function VoiceRecButton({ onResult }: { onResult: (text: string) 
     onClick={handleStartListening}
     disabled={listening}
   >
-    <div className="absolute inset-0 rounded-full bg-gradient-to-r from-green-400/20 to-cyan-400/20 blur-lg"></div>
+    <div className="absolute inset-0 rounded-full bg-linear-to-r from-green-400/20 to-cyan-400/20 blur-lg"></div>
     <div className="relative flex items-center space-x-2">
       {listening ? (
         <>

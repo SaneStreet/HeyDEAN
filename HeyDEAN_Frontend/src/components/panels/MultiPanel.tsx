@@ -122,12 +122,12 @@ export default function MultiPanel({ type, data, onItemAction }: MultiPanelProps
   <div className="fixed inset-0 bg-black/80 backdrop-blur-lg flex items-center justify-center z-50">
     <div className="relative w-full max-w-2xl mx-4 max-h-[80vh] overflow-hidden">
       {/* Glowing border effect */}
-      <div className="absolute inset-0 bg-gradient-to-r from-green-400/20 via-cyan-400/20 to-green-400/20 blur-xl"></div>
+      <div className="absolute inset-0 bg-linear-to-r from-green-400/20 via-cyan-400/20 to-green-400/20 blur-xl"></div>
       
       <div className="relative border border-green-400/50 rounded-xl bg-black/90 backdrop-blur-md shadow-2xl shadow-green-400/20">
         {/* Header */}
         <div className="flex items-center justify-between p-4 border-b border-green-400/30 bg-black/50">
-          <h2 className="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-cyan-400 font-mono">
+          <h2 className="text-xl font-bold text-transparent bg-clip-text bg-linear-to-r from-green-400 to-cyan-400 font-mono">
             {getPanelTitle().toUpperCase()}
           </h2>
         </div>

@@ -4,16 +4,15 @@ import MultiPanel from "../components/panels/MultiPanel";
 import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 
-console.log("This is loaded before the page")
 export default function DeanPage() {
-    console.log("this is before the variables")
     const [error, setError] = useState("");
+    const { username, logout } = useAuth();
+    const navigate = useNavigate();
     const [panelState, setPanelState] = useState<{
         type: 'notes' | 'tasks' | 'events' | null;
         data: any[];
         }>({ type: null, data: [] });
-    const { username, logout } = useAuth();
-    const navigate = useNavigate();
+    
 
     //console.log("DeanPage - token:", token);
     //console.log("DeanPage - username:", username);
@@ -34,7 +33,7 @@ export default function DeanPage() {
     const handleVoiceInput = async (userText: string) => {
         const token = localStorage.getItem("token");
         const lowerUserText = userText.toLowerCase();
-        console.log("User:\n " + userText)
+        console.log("User:\n " + lowerUserText)
 
         console.log("Checking for voice commands that shows appropriate data")
         try {
@@ -74,7 +73,7 @@ export default function DeanPage() {
                 });
                 console.log("Fallback to DEAN. No command was executed.");
                 navigate("/dean");
-                const data = await result.json();
+                await result.json();
             }
 
         } catch (error){
@@ -94,10 +93,10 @@ export default function DeanPage() {
             <div className="matrix-bg"></div>
             <div className="relative z-10 flex flex-col items-center p-6 space-y-6 w-full">
                 <div className="text-center">
-                    <h1 className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-cyan-400 mb-2">
+                    <h1 className="text-4xl font-bold text-transparent bg-clip-text bg-linear-to-r from-green-400 to-cyan-400 mb-2">
                         {getRandomGreeting()}, {username && `${username}`}
                     </h1>
-                    <div className="h-px w-32 bg-gradient-to-r from-transparent via-green-400 to-transparent mx-auto mb-4"></div>
+                    <div className="h-px w-32 bg-linear-to-r from-transparent via-green-400 to-transparent mx-auto mb-4"></div>
                     <p className="text-lg text-green-300 opacity-80 font-mono">
                         &gt; What can I help you with?
                     </p>
@@ -114,7 +113,6 @@ export default function DeanPage() {
                     <MultiPanel
                         type={panelState.type}
                         data={panelState.data}
-                        //onClose={() => setPanelState({ type: null, data: [] })}
                         onItemAction={(item, action) => {
                         // Handle item actions like toggle task completion
                         }}
