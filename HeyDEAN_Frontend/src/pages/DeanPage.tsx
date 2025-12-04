@@ -1,70 +1,136 @@
 import { useState } from "react";
 import VoiceRecButton from "../components/buttons/VoiceRecButton";
 import MultiPanel from "../components/panels/MultiPanel";
-import ChatBubbleUser from "../components/ChatBubbleUser";
-import ChatBubbleDean from "../components/ChatBubbleDean";
+import { useAuth } from "../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 console.log("This is loaded before the page")
 export default function DeanPage() {
     console.log("this is before the variables")
-    const [messages, setMessages] = useState<{ from: "user" | "dean"; text: string; panel?: any }[]>([]);
     const [error, setError] = useState("");
+    const [panelState, setPanelState] = useState<{
+        type: 'notes' | 'tasks' | 'events' | null;
+        data: any[];
+        }>({ type: null, data: [] });
+    const { username, logout } = useAuth();
+    const navigate = useNavigate();
 
-    let handleVoiceInput = (userText: string) => {
+    //console.log("DeanPage - token:", token);
+    //console.log("DeanPage - username:", username);
+    //console.log("DeanPage - typeof username:", typeof username);
+
+    const greetings = [
+        "Howdy",
+        "Greetings",
+        "Hello there",
+        "Welcome",
+        "Salutations",
+    ];
+
+    const getRandomGreeting = () => {
+        return greetings[Math.floor(Math.random() * greetings.length)]
+    };
+
+    const handleVoiceInput = async (userText: string) => {
         const token = localStorage.getItem("token");
-        console.log("This is inside VoiceInput after token")
-        setMessages(prev => [...prev, { from: "user", text: userText }]);
+        const lowerUserText = userText.toLowerCase();
+        console.log("User:\n " + userText)
 
-        console.log("This is outside of Try-catch")
+        console.log("Checking for voice commands that shows appropriate data")
         try {
-            {/*const res = await fetch("http://localhost:5152/api/dean/ask", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization: `Bearer ${token}`,
-                },
-                body: JSON.stringify({ prompt: userText }),
-            });
+            let API_URL = "http://localhost:5152/api/"
+            if (lowerUserText.includes("note")) {
+                const result = await fetch(API_URL + "notes", {
+                    headers: { Authorization: `Bearer ${token}`}
+                });
+                console.log("Notes fetched from API.");
+                const notesData = await result.json();
+                setPanelState({ type: "notes", data: notesData})
+            } 
+            else if (lowerUserText.includes("task")) {
+                const result = await fetch(API_URL + "tasks", {
+                    headers: { Authorization: `Bearer ${token}` }
+                });
+                console.log("Tasks fetched from API.");
+                const tasksData = await result.json();
+                setPanelState({type: "tasks", data: tasksData});
+            }
+            else if (lowerUserText.includes("event")) {
+                const result = await fetch(API_URL + "events", {
+                    headers: { Authorization: `Bearer ${token}`}
+                });
+                console.log("Events fetched from API.");
+                const eventsData = await result.json();
+                setPanelState({type: "events", data: eventsData})
+            }
+            else {
+                const result = await fetch(API_URL + "dean/ask", {
+                    method: "POST",
+                    headers: { 
+                        Authorization: `Bearer ${token}`,
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({ prompt: userText}),
+                });
+                console.log("Fallback to DEAN. No command was executed.");
+                navigate("/dean");
+                const data = await result.json();
+            }
 
-            const data = await res.json();
-            console.log(data);
-
-            if (data.type === "notes" || data.type === "tasks" || data.type === "events") {
-                setMessages(prev => [...prev, { from: "dean", text: data.message, panel: data.items }]);
-            } else {
-                setMessages(prev => [...prev, { from: "dean", text: data.message }]);
-            }*/}
-
-        } catch {
-            setMessages(prev => [...prev, { from: "dean", text: "Error connecting to backend." }]);
+        } catch (error){
             setError("Error connecting to backend.");
-            console.log(error);
+            console.log("Error connecting to backend.\n" + error);
         }
     };
 
+    {/* Handles onclick event for logging out a user. This clears cookies for all data stored. */}
+    const handleLogout = () => {
+        logout();
+        navigate("/login");
+    }
+
     return (
-        <div className="flex flex-col items-center p-6 space-y-6 w-full">
-            <h1 className="text-3xl font-bold">Greetings 👋</h1>
-            <p className="text-lg opacity-70">What can I help you with?</p>
-            {error && <p className="text-red-500 mt-2.5">{error}</p>}
+        <div className="min-h-screen relative">
+            <div className="matrix-bg"></div>
+            <div className="relative z-10 flex flex-col items-center p-6 space-y-6 w-full">
+                <div className="text-center">
+                    <h1 className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-cyan-400 mb-2">
+                        {getRandomGreeting()}, {username && `${username}`}
+                    </h1>
+                    <div className="h-px w-32 bg-gradient-to-r from-transparent via-green-400 to-transparent mx-auto mb-4"></div>
+                    <p className="text-lg text-green-300 opacity-80 font-mono">
+                        &gt; What can I help you with?
+                    </p>
+                </div>
 
-            <VoiceRecButton onResult={() => handleVoiceInput} />
-
-            {error && <p className="text-red-500 mt-2.5">{error}</p>}
-            <div className="w-full min-h-fit max-w-lg space-y-4 mt-6">
-                {messages.map((msg, idx) => (
-                    msg.from === "user" ? (
-                        <ChatBubbleUser key={idx} text={msg.text} />
-                    ) : (
-                        <>
-                            <ChatBubbleDean key={`dean-${idx}`} text={msg.text} />
-                            {msg.panel && msg.panel.length > 0 && <MultiPanel text={msg.text} items={msg.panel} />}
-                        </>
-                    )
-                ))}
-                {error && <p className="text-red-500 mt-2.5">{error}</p>}
+                {/* VoiceRecButton */}
+                <div className="relative">
+                    <div className="absolute inset-0 bg-green-400 blur-xl opacity-20 animate-pulse"></div>
+                    <VoiceRecButton onResult={handleVoiceInput} />
+                </div>
+                {/* MultiPanel for showing notes, tasks, and events */}
+                <div className="flex min-h-64 min-w-2xl p-2.5 backdrop-blur-md">
+                {panelState.type && (
+                    <MultiPanel
+                        type={panelState.type}
+                        data={panelState.data}
+                        //onClose={() => setPanelState({ type: null, data: [] })}
+                        onItemAction={(item, action) => {
+                        // Handle item actions like toggle task completion
+                        }}
+                    />
+                )}
+                    {/* Error messages */}
+                    {error && (
+                        <div className="max-w-md p-4 border border-red-500/50 rounded-lg bg-red-950/50 backdrop-blur-sm">
+                        <p className="text-red-400 font-mono text-sm">
+                            [ERROR] {error}
+                        </p>
+                        </div>
+                    )}
+                </div>
+                <button onClick={handleLogout}>Logout</button>
             </div>
-            {error && <p className="text-red-500 mt-2.5">{error}</p>}
         </div>
     );
 
