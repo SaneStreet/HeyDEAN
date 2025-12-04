@@ -13,6 +13,15 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  --matrix-green: #00ff41;
+  --matrix-green-bright: #00ff00;
+  --matrix-dark: #0a0a0a;
+  --matrix-darker: #050505;
+  --jarvis-blue: #00d4ff;
+  --jarvis-cyan: #00ffff;
+  --neon-orange: #ff6b35;
+
 }
 
 a {
@@ -30,6 +39,47 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  background: var(--matrix-darker);
+  background-image: 
+    radial-gradient(circle at 20% 50%, rgba(0, 255, 65, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(0, 212, 255, 0.1) 0%, transparent 50%),
+    linear-gradient(180deg, #0a0a0a 0%, #000000 100%);
+  color: var(--matrix-green);
+}
+
+.matrix-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  opacity: 0.05;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 255, 65, 0.03) 2px,
+    rgba(0, 255, 65, 0.03) 4px
+  );
+}
+
+/* Matrix rain effect (optional) */
+.matrix-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  opacity: 0.05;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 255, 65, 0.03) 2px,
+    rgba(0, 255, 65, 0.03) 4px
+  );
 }
 
 h1 {
