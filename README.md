@@ -41,32 +41,26 @@ Disse er baseret på hvad brugeren gerne vil gennem CRUD operations vha. DEAN:
 ```bash
 HeyDEAN/
 │
-├── 🗂️ HeyDEAN_API/                        # API hovedmappe          
-│   ├── 📁 Controllers/                    # API controllers
-│   ├── 📁 Data/                           # DbContext og Seeders
-│   ├── 📁 DTOs/                           # Data Transferable Objects
-│   ├── 📁 Extensions/                     # Mapping til DTOs
-│   ├── 📁 Models/                         # Data modeller
-│   ├── 📁 Repositories/                   # Repository pattern filer
-│   ├── 📁 Services/                       # Service pattern filer
-│   └── ⚙️ Program.cs                      # Where the magic is built
+├── 🗂️ HeyDEAN_API/           # API hovedmappe          
+│   ├── 📁 Controllers/         # API controllers
+│   ├── 📁 Data/                # DbContext og Seeders
+│   ├── 📁 DTOs/                # Data Transferable Objects
+│   ├── 📁 Extensions/          # Mapping til DTOs
+│   ├── 📁 Models/              # Data modeller
+│   ├── 📁 Repositories/        # Repository pattern filer
+│   ├── 📁 Services/            # Service pattern filer
+│   └── ⚙️ Program.cs           # Where the magic is built
 │
-├── 🗂️ HeyDEAN_Frontend/                   # Frontend hovedmappe
-│   ├── 📁 src/                            # Source med alle filer/mapper
-│   │   ├── 📁 components/                 # Mappe til forskellige komponenter
-│   │   │   ├── VoiceRecButton.tsx
-│   │   │   ├── Panel.tsx
-│   │   │   └── ChatBubble.tsx
-│   │   ├── 📁 pages/                      # Mappe til forskellige sider
-│   │   │   ├── LoginPage.tsx
-│   │   │   └── DeanPage.tsx
-│   │   ├── 📁 context/                    # Mappe til context mellem Auth og API
-│   │   │   └── AuthContext.tsx
-│   │   ├── 📁 lib/                        # Indeholder JWT authentication filer
-│   │   │   ├── api.ts
-│   │   │   └── auth.ts
-│   │   └── 📜 main.tsx                    # Where the magic empowered
-│   └── 🖼️ index.html                      # Where the magic is shown
+├── 🗂️ HeyDEAN_Frontend/      # Frontend hovedmappe
+│   ├── 📁 src/                 # Source med alle filer/mapper
+│   │   ├── 📁 components/        # Mappe til forskellige komponenter
+│   │   │   ├── 📁 buttons/         # Indeholder alle knapper
+│   │   │   ├── 📁 panels/          # Indeholder paneller
+│   │   ├── 📁 pages/             # Mappe til forskellige sider
+│   │   ├── 📁 context/           # Mappe til context mellem Auth og API
+│   │   ├── 📁 lib/               # Indeholder Auth og Token generation (JWT)
+│   │   └── 📜 main.tsx           # Where the magic is empowered
+│   └── 🖼️ index.html         # Where the magic is shown (simple HTML page)
 
 ```
 
@@ -78,12 +72,12 @@ HeyDEAN/
 * TypeScript
 * Vite
 * TailwindCSS
-* react-speech-recognition (WebSpeech API integration)
+* Web Speech API
 
 ### 🧰 Backend
 * ASP.NET Core 9
 * Entity Framework Core
-* JWT Auth
+* JWT Authentication
 * MySQL
 
 For at installere og køre systemet, er der disse krav:
