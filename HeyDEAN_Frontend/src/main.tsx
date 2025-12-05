@@ -5,6 +5,7 @@ import { AuthProvider } from "./context/AuthContext";
 
 import LoginPage from "./pages/LoginPage";
 import DeanPage from "./pages/DeanPage";
+import RegisterPage from "./pages/RegisterPage";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
@@ -13,6 +14,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
         <Routes>
           <Route path="/login" element={<LoginPage />} />
           <Route path="/dean" element={<DeanPage />} />
+          <Route path="/register" element={<RegisterPage />} />
           <Route path="*" element={<LoginPage />} />
         </Routes>
       </BrowserRouter>

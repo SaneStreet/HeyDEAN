@@ -71,7 +71,12 @@ export default function VoiceRecButton({ onResult }: { onResult: (text: string) 
 
     return (
   <button
-    className="relative px-8 py-4 rounded-full border-2 border-green-400/50 bg-black/50 backdrop-blur-md text-green-400 font-mono text-lg shadow-2xl hover:shadow-green-400/25 hover:border-green-400 hover:bg-green-400/10 transition-all duration-300 hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
+    className="relative px-8 py-4 rounded-full border-2 
+             border-green-400/50 bg-black/50 backdrop-blur-md 
+             text-green-400 font-mono text-lg shadow-2xl 
+              hover:shadow-green-400/25 hover:border-green-400 
+              hover:bg-green-400/10 transition-all duration-300 
+              hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
     onClick={handleStartListening}
     disabled={listening}
   >

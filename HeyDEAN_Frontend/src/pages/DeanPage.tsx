@@ -108,7 +108,7 @@ export default function DeanPage() {
                     <VoiceRecButton onResult={handleVoiceInput} />
                 </div>
                 {/* MultiPanel for showing notes, tasks, and events */}
-                <div className="flex min-h-64 min-w-2xl p-2.5 backdrop-blur-md">
+                <div className="flex min-h-64 min-w-2xl p-2.5 backdrop-blur-md"></div>
                 {panelState.type && (
                     <MultiPanel
                         type={panelState.type}
@@ -129,7 +129,6 @@ export default function DeanPage() {
                 </div>
                 <button onClick={handleLogout}>Logout</button>
             </div>
-        </div>
     );
 
 }
